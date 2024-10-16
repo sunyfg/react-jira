@@ -18,13 +18,13 @@ export default function ProjectList() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(removeEmptyValue(param))}`).then(
-      async (response) => {
-        if (response.ok) {
-          setList(await response.json());
-        }
-      },
-    );
+    fetch(
+      `${apiUrl}/projects?${qs.stringify(removeEmptyValue(debouncedParam))}`,
+    ).then(async (response) => {
+      if (response.ok) {
+        setList(await response.json());
+      }
+    });
   }, [debouncedParam]);
 
   useMount(() => {
