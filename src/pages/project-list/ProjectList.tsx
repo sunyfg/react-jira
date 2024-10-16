@@ -18,7 +18,7 @@ export default function List({ users, list }: Props) {
           <tr key={item.id}>
             <td>{item.name}</td>
             <td>
-              {users.find((user) => user.id === item.personId)?.name || "未知"}
+              {users.find((user) => user.id == item.personId)?.name || "未知"}
             </td>
           </tr>
         ))}

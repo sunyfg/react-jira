@@ -3,6 +3,8 @@ import qs from "qs";
 import List from "./ProjectList";
 import SearchPanel from "./SearchPanel";
 import { removeEmptyValue } from "../../utils/utils";
+import useMount from "../../hooks/useMount";
+import useDebounce from "../../hooks/useDebounce";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -12,6 +14,7 @@ export default function ProjectList() {
     name: "",
     personId: "1",
   });
+  const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -22,15 +25,15 @@ export default function ProjectList() {
         }
       },
     );
-  }, [param]);
+  }, [debouncedParam]);
 
-  useEffect(() => {
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {
       if (response.ok) {
         setUsers(await response.json());
       }
     });
-  }, []);
+  });
 
   return (
     <div>
