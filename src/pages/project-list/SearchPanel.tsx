@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 export interface User {
   id: string;
   name: string;
+  token: string;
 }
 
 interface SearchPanelProps {

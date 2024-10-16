@@ -1,13 +1,11 @@
 import { FormEvent } from "react";
-import { useAuth } from "../../context/auth-context";
-
-const apiUrl = import.meta.env.VITE_API_URL;
+import { useAuth } from "../context/auth-context";
 
 export default function Login() {
   const { login, user } = useAuth();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle login
+
     const username = e.currentTarget.username.value;
     const password = e.currentTarget.password.value;
     console.log(username, password);

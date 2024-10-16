@@ -1,24 +1,23 @@
 import { FormEvent } from "react";
-import { useAuth } from "../../context/auth-context";
+import { useAuth } from "../context/auth-context";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
-export default function Login() {
-  const { login, user } = useAuth();
+export default function Register() {
+  const { register, user } = useAuth();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: handle login
+
     const username = e.currentTarget.username.value;
     const password = e.currentTarget.password.value;
     console.log(username, password);
-    login({ username, password });
+    register({ username, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {user && (
         <div>
-          <p>登录成功，用户名：{user?.name}</p>
+          <p>注册成功，用户名：{user.name}</p>
+          <p>token: {user.token}</p>
         </div>
       )}
       <div>
@@ -29,7 +28,7 @@ export default function Login() {
         <label htmlFor="password">密码</label>
         <input type="password" id="password" />
       </div>
-      <button type="submit">登录</button>
+      <button type="submit">注册</button>
     </form>
   );
 }
