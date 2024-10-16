@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 
+export interface User {
+  id: string;
+  name: string;
+}
+
 interface SearchPanelProps {
-  param: any;
-  setParam: any;
-  users: any[];
+  param: {
+    name: string;
+    personId: string;
+  };
+  setParam: (param: SearchPanelProps["param"]) => void;
+  users: User[];
 }
 export default function SearchPanel({
   users,
@@ -28,7 +36,7 @@ export default function SearchPanel({
           onChange={(evt) => setParam({ ...param, personId: evt.target.value })}
         >
           <option value="">负责人</option>
-          {users.map((user: any) => {
+          {users.map((user: User) => {
             return (
               <option key={user.id} value={user.id}>
                 {user.name}

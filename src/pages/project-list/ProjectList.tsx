@@ -1,10 +1,18 @@
-import React from "react";
+import { User } from "./SearchPanel";
 
-interface Props {
-  list: any;
-  users: any[];
+interface Project {
+  id: string;
+  name: string;
+  personId: string;
+  pin: string;
+  organization: string;
 }
-export default function List({ users, list }: Props) {
+
+interface ListProps {
+  list: Project[];
+  users: User[];
+}
+export default function List({ users, list }: ListProps) {
   return (
     <table>
       <thead>
@@ -14,11 +22,11 @@ export default function List({ users, list }: Props) {
         </tr>
       </thead>
       <tbody>
-        {list.map((item: any) => (
+        {list.map((item: Project) => (
           <tr key={item.id}>
             <td>{item.name}</td>
             <td>
-              {users.find((user) => user.id == item.personId)?.name || "未知"}
+              {users.find((user) => user.id === item.personId)?.name || "未知"}
             </td>
           </tr>
         ))}
