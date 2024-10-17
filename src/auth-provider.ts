@@ -24,7 +24,7 @@ export const login = (data: { username: string; password: string }) => {
       const data = await response.json();
       return handleUserResponse(data);
     } else {
-      return Promise.reject(data);
+      return Promise.reject(await response.json());
     }
   });
 };
@@ -42,7 +42,7 @@ export const register = (data: { username: string; password: string }) => {
       const data = await response.json();
       return handleUserResponse(data);
     } else {
-      return Promise.reject(data);
+      return Promise.reject(await response.json());
     }
   });
 };
