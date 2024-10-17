@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
+import { removeEmptyValue } from "./utils";
 
 /**
  * 返回 url中，指定参数的值
@@ -18,6 +19,12 @@ export const useUrlQueryParam = <T extends string>(keys: T[]) => {
         ),
       [searchParams, keys],
     ),
-    setSearchParams, // 返回 setSearchParams，方便在组件中调用
+    (params: Partial<{ [key in T]: string }>) => {
+      const o = removeEmptyValue({
+        ...Object.fromEntries(searchParams),
+        ...params,
+      }) as URLSearchParamsInit;
+      setSearchParams(o);
+    },
   ] as const;
 };
