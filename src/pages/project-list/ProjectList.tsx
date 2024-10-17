@@ -19,6 +19,7 @@ export default function List({ users, list }: ListProps) {
   return (
     <Table
       pagination={false}
+      rowKey="id"
       columns={[
         {
           title: "名称",

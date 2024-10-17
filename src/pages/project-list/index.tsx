@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import qs from "qs";
 import List from "./ProjectList";
 import SearchPanel from "./SearchPanel";
 import { removeEmptyValue } from "../../utils/utils";
 import useMount from "../../hooks/useMount";
 import useDebounce from "../../hooks/useDebounce";
 import { useHttp } from "../../utils/http";
-import { useAuth } from "../../context/auth-context";
 import styled from "@emotion/styled";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
 export default function ProjectList() {
-  const { user } = useAuth();
   const [users, setUsers] = useState([]);
   const [param, setParam] = useState({
     name: "",
-    personId: "1",
+    personId: "",
   });
   const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);

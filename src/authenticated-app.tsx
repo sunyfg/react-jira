@@ -3,7 +3,7 @@ import { useAuth } from "./context/auth-context";
 import ProjectListScreen from "./pages/project-list/index";
 import SoftwareLogo from "./assets/software-logo.svg";
 import styled from "@emotion/styled";
-import { Dropdown, MenuProps } from "antd";
+import { Button, Dropdown, MenuProps } from "antd";
 
 export default function AuthenticatedApp() {
   const { logout, user } = useAuth();
@@ -29,7 +29,9 @@ export default function AuthenticatedApp() {
               onClick: handleClick,
             }}
           >
-            <a onClick={(e) => e.preventDefault()}>Hi, {user?.name}</a>
+            <Button type="link" onClick={(e) => e.preventDefault()}>
+              Hi, {user?.name}
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
