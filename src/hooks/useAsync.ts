@@ -29,6 +29,8 @@ const useAsync = <D>(
     ...initialState,
   });
 
+  const [retry, setRetry] = useState(() => () => {});
+
   const setData = (data: D) =>
     setState({ data, status: "success", error: null });
 
@@ -36,10 +38,19 @@ const useAsync = <D>(
     setState({ error, status: "error", data: null });
 
   // 触发异步操作
-  const run = (promise: Promise<D>) => {
+  const run = (
+    promise: Promise<D>,
+    runConfig?: { retry: () => Promise<D> },
+  ) => {
     if (!promise || typeof promise.then !== "function") {
       throw new Error("Promise argument required");
     }
+
+    setRetry(() => () => {
+      if (runConfig?.retry) {
+        run(runConfig?.retry(), runConfig);
+      }
+    });
 
     setState({ ...state, status: "loading", error: null });
 
@@ -68,6 +79,7 @@ const useAsync = <D>(
     run,
     setData,
     setError,
+    retry,
     ...state,
   };
 };
