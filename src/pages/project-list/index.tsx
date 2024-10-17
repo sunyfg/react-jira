@@ -7,6 +7,7 @@ import useMount from "../../hooks/useMount";
 import useDebounce from "../../hooks/useDebounce";
 import { useHttp } from "../../utils/http";
 import { useAuth } from "../../context/auth-context";
+import styled from "@emotion/styled";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -33,9 +34,14 @@ export default function ProjectList() {
   });
 
   return (
-    <div>
+    <Container>
+      <h1>项目列表</h1>
       <SearchPanel users={users} param={param} setParam={setParam} />
       <List users={users} list={list} />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;

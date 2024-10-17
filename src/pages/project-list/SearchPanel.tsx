@@ -1,4 +1,4 @@
-import { Input, Select } from "antd";
+import { Form, Input, Select } from "antd";
 export interface User {
   id: string;
   name: string;
@@ -19,10 +19,11 @@ export default function SearchPanel({
   setParam,
 }: SearchPanelProps) {
   return (
-    <form>
-      <div>
+    <Form style={{ marginBottom: "2rem" }} layout={"inline"}>
+      <Form.Item>
         <Input
           type="text"
+          placeholder="项目名"
           value={param.name}
           onChange={(evt) =>
             setParam({
@@ -31,8 +32,10 @@ export default function SearchPanel({
             })
           }
         />
+      </Form.Item>
+      <Form.Item>
         <Select
-          value={param.personId}
+          value={param.personId || ""}
           onChange={(value) => setParam({ ...param, personId: value })}
         >
           <Select.Option value="">负责人</Select.Option>
@@ -44,7 +47,7 @@ export default function SearchPanel({
             );
           })}
         </Select>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   );
 }
