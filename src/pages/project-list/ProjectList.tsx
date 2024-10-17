@@ -27,7 +27,7 @@ export default function List({ users, ...props }: ListProps) {
           key: "name",
           sorter: (a, b) => a.name.localeCompare(b.name), // 按照名称排序
           render: (name: string, project) => {
-            return <Link to={project.id}>{name}</Link>;
+            return <Link to={String(project.id)}>{name}</Link>;
           },
         },
         {
@@ -39,7 +39,7 @@ export default function List({ users, ...props }: ListProps) {
           title: "负责人",
           dataIndex: "personId",
           key: "personId",
-          render: (personId: string) => {
+          render: (personId) => {
             return users.find((user) => user.id === personId)?.name || "未知";
           },
         },
