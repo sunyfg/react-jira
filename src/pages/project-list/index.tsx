@@ -6,14 +6,12 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
-import { useUrlQueryParam } from "../../utils/url";
+import { useProjectsSearchParams } from "./util";
 
 export default function ProjectList() {
-  const [keys] = useState<("name" | "personId")[]>(["name", "personId"]);
-  const [param, setParam] = useUrlQueryParam(keys);
-  const debouncedParam = useDebounce(param, 500);
+  const [param, setParam] = useProjectsSearchParams();
 
-  const { isLoading, error, data: list } = useProjects(debouncedParam);
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 500));
   const { data: users } = useUsers();
 
   return (

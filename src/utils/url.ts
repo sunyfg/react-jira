@@ -19,7 +19,7 @@ export const useUrlQueryParam = <T extends string>(keys: T[]) => {
         ),
       [searchParams, keys],
     ),
-    (params: Partial<{ [key in T]: string }>) => {
+    (params: Partial<{ [key in T]: unknown }>) => {
       const o = removeEmptyValue({
         ...Object.fromEntries(searchParams),
         ...params,
