@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { User } from "./SearchPanel";
 import { Table, TableProps } from "antd";
 
-interface Project {
+export interface Project {
   id: string;
   name: string;
   personId: string;
