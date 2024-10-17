@@ -7,3 +7,6 @@ export function removeEmptyValue(obj: { [key: string]: unknown }) {
   }
   return obj;
 }
+
+// 重置路由
+export const resetRoute = () => (window.location.href = window.location.origin);
