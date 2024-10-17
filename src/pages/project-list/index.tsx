@@ -6,6 +6,7 @@ import useMount from "../../hooks/useMount";
 import useDebounce from "../../hooks/useDebounce";
 import { useHttp } from "../../utils/http";
 import styled from "@emotion/styled";
+import { Typography } from "antd";
 
 export default function ProjectList() {
   const [users, setUsers] = useState([]);
@@ -15,13 +16,24 @@ export default function ProjectList() {
   });
   const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<null | Error>(null);
 
   const client = useHttp();
 
   useEffect(() => {
-    client("projects", { data: removeEmptyValue(debouncedParam) }).then(
-      setList,
-    );
+    setIsLoading(true);
+    client("projects", { data: removeEmptyValue(debouncedParam) })
+      .then(setList)
+      .catch((error) => {
+        setList([]);
+        setError(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      });
   }, [debouncedParam]);
 
   useMount(() => {
@@ -32,7 +44,10 @@ export default function ProjectList() {
     <Container>
       <h1>项目列表</h1>
       <SearchPanel users={users} param={param} setParam={setParam} />
-      <List users={users} list={list} />
+      {error ? (
+        <Typography.Text type="danger">{error.message}</Typography.Text>
+      ) : null}
+      <List loading={isLoading} users={users} dataSource={list} />
     </Container>
   );
 }
