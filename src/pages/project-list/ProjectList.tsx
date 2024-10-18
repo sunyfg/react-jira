@@ -58,7 +58,9 @@ export default function List({ users, ...props }: ListProps) {
           dataIndex: "personId",
           key: "personId",
           render: (personId) => {
-            return users.find((user) => user.id === personId)?.name || "未知";
+            return (
+              users.find((user) => user.id === Number(personId))?.name || "未知"
+            );
           },
         },
         {

@@ -36,7 +36,8 @@ export default function ProjectList() {
   );
 }
 
-ProjectList.whyDidYouRender = true;
+// whyDidYouRender 用于检测组件是否被重新渲染
+ProjectList.whyDidYouRender = false;
 
 const Container = styled.div`
   padding: 3.2rem;

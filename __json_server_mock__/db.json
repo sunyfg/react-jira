@@ -40,7 +40,7 @@
       "personId": "3",
       "organization": "外卖组",
       "created": 1609459200000,
-      "pin": true
+      "pin": false
     },
     {
       "id": "4",
@@ -48,7 +48,7 @@
       "personId": "4",
       "organization": "外卖组",
       "created": 1609459200000,
-      "pin": true
+      "pin": false
     },
     {
       "id": "5",

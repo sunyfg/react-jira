@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMountedRef } from "../utils/utils";
 
 interface State<D> {
   data: D | null;
@@ -30,6 +31,7 @@ const useAsync = <D>(
   });
 
   const [retry, setRetry] = useState(() => () => {});
+  const mountedRef = useMountedRef();
 
   const setData = (data: D) =>
     setState({ data, status: "success", error: null });
@@ -58,7 +60,9 @@ const useAsync = <D>(
       .then((data) => {
         // 模拟延迟1秒
         setTimeout(() => {
-          setData(data);
+          if (mountedRef.current) {
+            setData(data);
+          }
         }, 1000);
         return data;
       })

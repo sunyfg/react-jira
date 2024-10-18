@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 // 删除对象中的空值
 export function removeEmptyValue(obj: { [key: string]: unknown }) {
   for (const key in obj) {
@@ -10,3 +12,19 @@ export function removeEmptyValue(obj: { [key: string]: unknown }) {
 
 // 重置路由
 export const resetRoute = () => (window.location.href = window.location.origin);
+
+/**
+ * 返回组件挂在状态
+ */
+export const useMountedRef = () => {
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+
+  return mountedRef;
+};
