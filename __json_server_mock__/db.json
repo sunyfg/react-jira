@@ -48,14 +48,15 @@
       "personId": "4",
       "organization": "外卖组",
       "created": 1609459200000,
-      "pin": true
+      "pin": false
     },
     {
       "id": "5",
       "name": "权限管理",
       "personId": "5",
       "organization": "外卖组",
-      "created": 1609459200000
+      "created": 1609459200000,
+      "pin": true
     }
   ],
   "me": {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useReducer, useState } from "react";
 import { useMountedRef } from "../utils/utils";
 
 interface State<D> {
@@ -17,6 +17,15 @@ const defaultConfig = {
   throwOnError: false,
 };
 
+const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {
+  const mountedRef = useMountedRef();
+
+  return useCallback(
+    (...args: T[]) => (mountedRef.current ? dispatch(...args) : void 0),
+    [dispatch, mountedRef],
+  );
+};
+
 const useAsync = <D>(
   initialState?: State<D>,
   initialConfig?: typeof defaultConfig,
@@ -25,22 +34,26 @@ const useAsync = <D>(
     ...defaultConfig,
     ...initialConfig,
   };
-  const [state, setState] = useState<State<D>>({
-    ...defaultInitialState,
-    ...initialState,
-  });
+  const [state, dispatch] = useReducer(
+    (state: State<D>, action: Partial<State<D>>) => ({ ...state, ...action }),
+    {
+      ...defaultInitialState,
+      ...initialState,
+    },
+  );
 
   const [retry, setRetry] = useState(() => () => {});
-  const mountedRef = useMountedRef();
+
+  const safeDispatch = useSafeDispatch(dispatch);
 
   const setData = useCallback(
-    (data: D) => setState({ data, status: "success", error: null }),
-    [],
+    (data: D) => safeDispatch({ data, status: "success", error: null }),
+    [safeDispatch],
   );
 
   const setError = useCallback(
-    (error: Error) => setState({ error, status: "error", data: null }),
-    [],
+    (error: Error) => safeDispatch({ error, status: "error", data: null }),
+    [safeDispatch],
   );
 
   // 触发异步操作
@@ -56,19 +69,13 @@ const useAsync = <D>(
         }
       });
 
-      setState((prevState) => ({
-        ...prevState,
-        status: "loading",
-        error: null,
-      }));
+      safeDispatch({ status: "loading" });
 
       return promise
         .then((data) => {
           // 模拟延迟1秒
           setTimeout(() => {
-            if (mountedRef.current) {
-              setData(data);
-            }
+            setData(data);
           }, 1000);
           return data;
         })
@@ -80,7 +87,7 @@ const useAsync = <D>(
           return error;
         });
     },
-    [config.throwOnError, mountedRef, setData, setError],
+    [config.throwOnError, safeDispatch, setData, setError],
   );
 
   return {

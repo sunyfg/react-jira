@@ -10,10 +10,11 @@ export const useProjects = (param?: Partial<Project>) => {
 
   const fetchProjects = useCallback(
     () => client("projects", { data: removeEmptyValue(param || {}) }),
-    [],
+    [param],
   );
 
   useEffect(() => {
+    console.log("update param:", param);
     run(fetchProjects(), {
       retry: fetchProjects,
     });
