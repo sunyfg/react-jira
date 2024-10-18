@@ -5,10 +5,11 @@ import styled from "@emotion/styled";
 import { Button, Typography } from "antd";
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
-import { useProjectsSearchParams } from "./util";
-import { Row } from "../../components/lib";
+import { useProjectModal, useProjectsSearchParams } from "./util";
+import { ButtonNoPadding, Row } from "../../components/lib";
 
-export default function ProjectList(props: { projectButton: React.ReactNode }) {
+export default function ProjectList() {
+  const { open } = useProjectModal();
   const [param, setParam] = useProjectsSearchParams();
 
   const {
@@ -23,7 +24,9 @@ export default function ProjectList(props: { projectButton: React.ReactNode }) {
     <Container>
       <Row between>
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding type={"link"} onClick={open}>
+          新建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
@@ -34,7 +37,6 @@ export default function ProjectList(props: { projectButton: React.ReactNode }) {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
-        projectButton={props.projectButton}
       />
     </Container>
   );

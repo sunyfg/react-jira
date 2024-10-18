@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Pin } from "../../components/pin";
 import { useEditProject } from "../../utils/project";
 import { ButtonNoPadding } from "../../components/lib";
+import { useProjectModal } from "./util";
 
 export interface Project {
   id: number;
@@ -18,9 +19,9 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  projectButton: React.ReactNode;
 }
 export default function List({ users, ...props }: ListProps) {
+  const { open } = useProjectModal();
   const { mutate: editProject } = useEditProject();
   const pinProject = (id: number) => (pin: boolean) =>
     editProject({ id, pin }).then(props.refresh);
@@ -84,7 +85,11 @@ export default function List({ users, ...props }: ListProps) {
             const items: MenuProps["items"] = [
               {
                 key: "edit",
-                label: props.projectButton,
+                label: (
+                  <ButtonNoPadding type={"link"} onClick={open}>
+                    新建项目
+                  </ButtonNoPadding>
+                ),
               },
               {
                 key: "delete",

@@ -76,7 +76,7 @@ const useAsync = <D>(
           // 模拟延迟1秒
           setTimeout(() => {
             setData(data);
-          }, 1000);
+          }, 500);
           return data;
         })
         .catch((error: Error) => {

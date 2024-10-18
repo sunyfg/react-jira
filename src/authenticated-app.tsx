@@ -8,58 +8,29 @@ import { Route, Routes, Navigate } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import ProjectScreen from "./pages/project";
 import { resetRoute } from "./utils/utils";
-import { useState } from "react";
 import { ProjectModal } from "./components/project-modal";
 import { ProjectPopover } from "./components/project-popover";
 
 export default function AuthenticatedApp() {
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
-
   return (
     <Container>
-      <PageHeader
-        projectButton={
-          <ButtonNoPadding
-            type={"link"}
-            onClick={() => setProjectModalOpen(true)}
-          >
-            创建项目
-          </ButtonNoPadding>
-        }
-      />
-      <Main>
-        <Router>
+      <Router>
+        <PageHeader />
+        <Main>
           <Routes>
-            <Route
-              path="/projects"
-              element={
-                <ProjectListScreen
-                  projectButton={
-                    <ButtonNoPadding
-                      type={"link"}
-                      onClick={() => setProjectModalOpen(true)}
-                    >
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            />
+            <Route path="/projects" element={<ProjectListScreen />} />
             <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
             {/* 默认路由 */}
             <Route path="/" element={<Navigate to="/projects" />} />
           </Routes>
-        </Router>
-      </Main>
-      <ProjectModal
-        projectModalOpen={projectModalOpen}
-        onClose={() => setProjectModalOpen(false)}
-      />
+        </Main>
+        <ProjectModal />
+      </Router>
     </Container>
   );
 }
 
-const PageHeader = (props: { projectButton: React.ReactNode }) => {
+const PageHeader = () => {
   return (
     <Header between>
       <HeaderLeft gap>
@@ -67,7 +38,7 @@ const PageHeader = (props: { projectButton: React.ReactNode }) => {
           <img src={SoftwareLogo} alt="" />
         </ButtonNoPadding>
 
-        <ProjectPopover projectButton={props.projectButton} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>

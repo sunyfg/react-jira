@@ -2,8 +2,10 @@ import { Button, Divider, List, Popover, Typography } from "antd";
 import { useProjects } from "../utils/project";
 import styled from "@emotion/styled";
 import { ButtonNoPadding } from "./lib";
+import { useProjectModal } from "../pages/project-list/util";
 
-export const ProjectPopover = (props: { projectButton: React.ReactNode }) => {
+export const ProjectPopover = () => {
+  const { open } = useProjectModal();
   const { data: projects, isLoading } = useProjects();
   const pinnedProjects = projects?.filter((p) => p.pin); // 获取被收藏的项目
 
@@ -18,7 +20,9 @@ export const ProjectPopover = (props: { projectButton: React.ReactNode }) => {
         ))}
       </List>
       <Divider />
-      {props.projectButton}
+      <ButtonNoPadding type={"link"} onClick={open}>
+        新建项目
+      </ButtonNoPadding>
     </ContentContainer>
   );
   return (
