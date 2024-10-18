@@ -17,14 +17,32 @@ export default function AuthenticatedApp() {
 
   return (
     <Container>
-      <PageHeader setProjectModalOpen={setProjectModalOpen} />
+      <PageHeader
+        projectButton={
+          <ButtonNoPadding
+            type={"link"}
+            onClick={() => setProjectModalOpen(true)}
+          >
+            创建项目
+          </ButtonNoPadding>
+        }
+      />
       <Main>
         <Router>
           <Routes>
             <Route
               path="/projects"
               element={
-                <ProjectListScreen setProjectModalOpen={setProjectModalOpen} />
+                <ProjectListScreen
+                  projectButton={
+                    <ButtonNoPadding
+                      type={"link"}
+                      onClick={() => setProjectModalOpen(true)}
+                    >
+                      创建项目
+                    </ButtonNoPadding>
+                  }
+                />
               }
             />
             <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
@@ -41,9 +59,7 @@ export default function AuthenticatedApp() {
   );
 }
 
-const PageHeader = (props: {
-  setProjectModalOpen: (open: boolean) => void;
-}) => {
+const PageHeader = (props: { projectButton: React.ReactNode }) => {
   return (
     <Header between>
       <HeaderLeft gap>
@@ -51,7 +67,7 @@ const PageHeader = (props: {
           <img src={SoftwareLogo} alt="" />
         </ButtonNoPadding>
 
-        <ProjectPopover setProjectModalOpen={props.setProjectModalOpen} />
+        <ProjectPopover projectButton={props.projectButton} />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>

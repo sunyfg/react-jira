@@ -18,7 +18,7 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  setProjectModalOpen?: (open: boolean) => void;
+  projectButton: React.ReactNode;
 }
 export default function List({ users, ...props }: ListProps) {
   const { mutate: editProject } = useEditProject();
@@ -84,14 +84,7 @@ export default function List({ users, ...props }: ListProps) {
             const items: MenuProps["items"] = [
               {
                 key: "edit",
-                label: (
-                  <ButtonNoPadding
-                    type={"link"}
-                    onClick={() => props.setProjectModalOpen?.(true)}
-                  >
-                    编辑
-                  </ButtonNoPadding>
-                ),
+                label: props.projectButton,
               },
               {
                 key: "delete",

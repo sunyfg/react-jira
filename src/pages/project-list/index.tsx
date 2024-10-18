@@ -8,9 +8,7 @@ import { useUsers } from "../../utils/user";
 import { useProjectsSearchParams } from "./util";
 import { Row } from "../../components/lib";
 
-export default function ProjectList(props: {
-  setProjectModalOpen: (open: boolean) => void;
-}) {
+export default function ProjectList(props: { projectButton: React.ReactNode }) {
   const [param, setParam] = useProjectsSearchParams();
 
   const {
@@ -25,9 +23,7 @@ export default function ProjectList(props: {
     <Container>
       <Row between>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setProjectModalOpen(true)}>
-          创建项目
-        </Button>
+        {props.projectButton}
       </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
@@ -38,7 +34,7 @@ export default function ProjectList(props: {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
-        setProjectModalOpen={props.setProjectModalOpen}
+        projectButton={props.projectButton}
       />
     </Container>
   );
