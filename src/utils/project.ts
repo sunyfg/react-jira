@@ -1,21 +1,23 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useHttp } from "./http";
 import useAsync from "../hooks/useAsync";
 import { removeEmptyValue } from "./utils";
 import { Project } from "../pages/project-list/ProjectList";
 
-export const useProjects = (param: Partial<Project>) => {
+export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
   const { run, ...result } = useAsync<Project[]>();
 
-  const fetchProjects = () =>
-    client("projects", { data: removeEmptyValue(param) });
+  const fetchProjects = useCallback(
+    () => client("projects", { data: removeEmptyValue(param || {}) }),
+    [],
+  );
 
   useEffect(() => {
     run(fetchProjects(), {
       retry: fetchProjects,
     });
-  }, [param]);
+  }, [param, run, fetchProjects]);
 
   return result;
 };

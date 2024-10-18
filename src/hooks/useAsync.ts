@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMountedRef } from "../utils/utils";
 
 interface State<D> {
@@ -33,47 +33,55 @@ const useAsync = <D>(
   const [retry, setRetry] = useState(() => () => {});
   const mountedRef = useMountedRef();
 
-  const setData = (data: D) =>
-    setState({ data, status: "success", error: null });
+  const setData = useCallback(
+    (data: D) => setState({ data, status: "success", error: null }),
+    [],
+  );
 
-  const setError = (error: Error) =>
-    setState({ error, status: "error", data: null });
+  const setError = useCallback(
+    (error: Error) => setState({ error, status: "error", data: null }),
+    [],
+  );
 
   // 触发异步操作
-  const run = (
-    promise: Promise<D>,
-    runConfig?: { retry: () => Promise<D> },
-  ) => {
-    if (!promise || typeof promise.then !== "function") {
-      throw new Error("Promise argument required");
-    }
-
-    setRetry(() => () => {
-      if (runConfig?.retry) {
-        run(runConfig?.retry(), runConfig);
+  const run = useCallback(
+    (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
+      if (!promise || typeof promise.then !== "function") {
+        throw new Error("Promise argument required");
       }
-    });
 
-    setState({ ...state, status: "loading", error: null });
-
-    return promise
-      .then((data) => {
-        // 模拟延迟1秒
-        setTimeout(() => {
-          if (mountedRef.current) {
-            setData(data);
-          }
-        }, 1000);
-        return data;
-      })
-      .catch((error) => {
-        setError(error);
-        if (config.throwOnError) {
-          return Promise.reject(error);
+      setRetry(() => () => {
+        if (runConfig?.retry) {
+          run(runConfig?.retry(), runConfig);
         }
-        return error;
       });
-  };
+
+      setState((prevState) => ({
+        ...prevState,
+        status: "loading",
+        error: null,
+      }));
+
+      return promise
+        .then((data) => {
+          // 模拟延迟1秒
+          setTimeout(() => {
+            if (mountedRef.current) {
+              setData(data);
+            }
+          }, 1000);
+          return data;
+        })
+        .catch((error: Error) => {
+          setError(error);
+          if (config.throwOnError) {
+            return Promise.reject(error);
+          }
+          return error;
+        });
+    },
+    [config.throwOnError, mountedRef, setData, setError],
+  );
 
   return {
     isIdle: state.status === "idle",

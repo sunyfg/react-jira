@@ -1,4 +1,3 @@
-import { useState } from "react";
 import List from "./ProjectList";
 import SearchPanel from "./SearchPanel";
 import useDebounce from "../../hooks/useDebounce";
@@ -7,8 +6,11 @@ import { Button, Typography } from "antd";
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
 import { useProjectsSearchParams } from "./util";
+import { Row } from "../../components/lib";
 
-export default function ProjectList() {
+export default function ProjectList(props: {
+  setProjectModalOpen: (open: boolean) => void;
+}) {
   const [param, setParam] = useProjectsSearchParams();
 
   const {
@@ -21,7 +23,12 @@ export default function ProjectList() {
 
   return (
     <Container>
-      <h1>项目列表</h1>
+      <Row between>
+        <h1>项目列表</h1>
+        <Button onClick={() => props.setProjectModalOpen(true)}>
+          创建项目
+        </Button>
+      </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type="danger">{error.message}</Typography.Text>
@@ -31,6 +38,7 @@ export default function ProjectList() {
         loading={isLoading}
         users={users || []}
         dataSource={list || []}
+        setProjectModalOpen={props.setProjectModalOpen}
       />
     </Container>
   );
