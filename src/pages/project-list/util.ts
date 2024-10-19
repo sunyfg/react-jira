@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useUrlQueryParam } from "../../utils/url";
+import { useProject } from "../../utils/project";
 
 export const useProjectsSearchParams = () => {
   const [keys] = useState<("name" | "personId")[]>(["name", "personId"]);
@@ -21,12 +22,31 @@ export const useProjectModal = () => {
     "projectCreate",
   ]);
 
+  const [{ editingProjectId }, setEditingProjectId] = useUrlQueryParam([
+    "editingProjectId",
+  ]);
+
+  const { data: editingProject, isLoading } = useProject(
+    Number(editingProjectId),
+  );
+
   const open = () => setProjectCreate({ projectCreate: true });
-  const close = () => setProjectCreate({ projectCreate: undefined });
+  const close = () => {
+    // console.log("🚀 ~ close ~ close:");
+    setProjectCreate({ projectCreate: undefined });
+    if (editingProjectId) {
+      setEditingProjectId({ editingProjectId: undefined });
+    }
+  };
+  const startEdit = (id: number) =>
+    setEditingProjectId({ editingProjectId: id });
 
   return {
-    projectModalOpen: projectCreate === "true",
+    projectModalOpen: projectCreate === "true" || Boolean(editingProjectId),
     open,
     close,
+    startEdit,
+    editingProject,
+    isLoading,
   };
 };
