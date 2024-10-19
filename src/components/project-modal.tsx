@@ -1,5 +1,8 @@
 import { Button, Drawer, Form, Input, Spin } from "antd";
-import { useProjectModal } from "../pages/project-list/util";
+import {
+  useProjectModal,
+  useProjectQueryKey,
+} from "../pages/project-list/util";
 import { UserSelect } from "./user-select";
 import { useAddProject, useEditProject } from "../utils/project";
 import { useForm } from "antd/es/form/Form";
@@ -14,7 +17,11 @@ export const ProjectModal = () => {
 
   const [form] = useForm();
 
-  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject();
+  const {
+    mutateAsync,
+    error,
+    isLoading: mutateLoading,
+  } = useMutateProject(useProjectQueryKey());
 
   const title = editingProject ? "编辑项目" : "创建项目";
 
