@@ -70,5 +70,94 @@
       "name": "admin",
       "token": "user token"
     }
-  }
+  },
+  "kanbans": [
+    {
+      "id": 1,
+      "name": "待完成",
+      "projectId": 1
+    },
+    {
+      "id": 2,
+      "name": "开发中",
+      "projectId": 1
+    },
+    {
+      "id": 3,
+      "name": "已完成",
+      "projectId": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "任务1",
+      "processorId": 1,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 1,
+      "typeId": 1,
+      "note": "这是任务1"
+    },
+    {
+      "id": 2,
+      "name": "任务2",
+      "processorId": 2,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 1,
+      "typeId": 2,
+      "note": "这是任务2"
+    },
+    {
+      "id": 3,
+      "name": "任务3",
+      "processorId": 3,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 2,
+      "typeId": 2,
+      "note": "这是任务3"
+    },
+    {
+      "id": 4,
+      "name": "任务4",
+      "processorId": 4,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 1,
+      "typeId": 1,
+      "note": "这是任务4"
+    },
+    {
+      "id": 5,
+      "name": "任务5",
+      "processorId": 5,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 2,
+      "typeId": 2,
+      "note": "这是任务5"
+    },
+    {
+      "id": 6,
+      "name": "任务6",
+      "processorId": 6,
+      "projectId": 1,
+      "epicId": 1,
+      "kanbanId": 3,
+      "typeId": 1,
+      "note": "这是任务6"
+    }
+  ],
+  "taskTypes": [
+    {
+      "id": 1,
+      "name": "task"
+    },
+    {
+      "id": 2,
+      "name": "bug"
+    }
+  ]
 }

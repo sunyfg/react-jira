@@ -28,3 +28,15 @@ export const useUrlQueryParam = <T extends string>(keys: T[]) => {
     },
   ] as const;
 };
+
+export const useSetUrlSearchParams = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  return (params: { [key in string]: unknown }) => {
+    const o = removeEmptyValue({
+      ...Object.fromEntries(searchParams),
+      ...params,
+    }) as URLSearchParamsInit;
+    return setSearchParams(o);
+  };
+};

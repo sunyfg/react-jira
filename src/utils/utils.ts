@@ -28,3 +28,21 @@ export const useMountedRef = () => {
 
   return mountedRef;
 };
+
+// 设置页面标题
+export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
+  const oldTitle = useRef(document.title).current;
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  useEffect(() => {
+    return () => {
+      if (keepOnUnmount) {
+        // 如果设置了keepOnUnmount为true，则在组件卸载时恢复旧的页面标题
+        document.title = oldTitle;
+      }
+    };
+  }, [keepOnUnmount, oldTitle]);
+};
