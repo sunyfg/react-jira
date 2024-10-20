@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-import { Project } from "./ProjectList";
+import { Project } from "../../types/project";
 import { UserSelect } from "../../components/user-select";
 export interface User {
   id: number;

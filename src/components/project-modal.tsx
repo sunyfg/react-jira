@@ -46,8 +46,10 @@ export const ProjectModal = () => {
       open={projectModalOpen}
       width={"100%"}
     >
-      {isLoading && editingProject ? (
-        <Spin size={"large"} />
+      {isLoading ? (
+        <Container>
+          <Spin size={"large"} />
+        </Container>
       ) : (
         <Container>
           <h1>{title}</h1>

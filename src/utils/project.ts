@@ -1,6 +1,6 @@
 import { useHttp } from "./http";
 import { removeEmptyValue } from "./utils";
-import { Project } from "../pages/project-list/ProjectList";
+import { Project } from "../types/project";
 import {
   QueryKey,
   useMutation,
