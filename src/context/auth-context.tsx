@@ -1,6 +1,6 @@
 import React from "react";
 import * as auth from "../auth-provider";
-import { User } from "../pages/project-list/SearchPanel";
+import { User } from "../types/user";
 import { http } from "../utils/http";
 import useMount from "../hooks/useMount";
 import useAsync from "../hooks/useAsync";

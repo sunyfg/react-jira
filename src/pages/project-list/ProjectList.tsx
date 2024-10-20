@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { User } from "./SearchPanel";
+import { User } from "../../types/user";
 import { Dropdown, MenuProps, Modal, Table, TableProps } from "antd";
 import { Link } from "react-router-dom";
 import { Pin } from "../../components/pin";

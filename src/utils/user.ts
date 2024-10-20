@@ -1,6 +1,6 @@
 import useAsync from "../hooks/useAsync";
 import useMount from "../hooks/useMount";
-import { User } from "../pages/project-list/SearchPanel";
+import { User } from "../types/user";
 import { useHttp } from "./http";
 import { removeEmptyValue } from "./utils";
 
