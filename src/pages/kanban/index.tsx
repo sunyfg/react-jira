@@ -12,6 +12,7 @@ import { ScreenContainer } from "../../components/lib";
 import { useTasks } from "../../utils/task";
 import { Spin } from "antd";
 import { CreateKanban } from "./create-kanban";
+import { TaskModal } from "./task-modal";
 
 export default function KanbanScreen() {
   useDocumentTitle("看板列表");
@@ -37,6 +38,7 @@ export default function KanbanScreen() {
           <CreateKanban />
         </ColumnsContainer>
       )}
+      <TaskModal />
     </ScreenContainer>
   );
 }

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useUrlQueryParam } from "../../utils/url";
 import { useProject } from "../../utils/project";
+import { removeEmptyValue } from "../../utils/utils";
 
 export const useProjectsSearchParams = () => {
   const [keys] = useState<("name" | "personId")[]>(["name", "personId"]);
@@ -19,8 +20,8 @@ export const useProjectsSearchParams = () => {
 
 export const useProjectQueryKey = () => {
   const [param] = useProjectsSearchParams();
-  console.log(["projects", param]);
-  return ["projects", param];
+  console.log(["projects", removeEmptyValue(param)]);
+  return ["projects", removeEmptyValue(param)];
 };
 
 export const useProjectModal = () => {

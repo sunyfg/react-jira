@@ -11,7 +11,6 @@ export const CreateKanban = () => {
 
   const submit = async () => {
     await addKanban({ name, projectId });
-    // reset the form
     setName("");
   };
 

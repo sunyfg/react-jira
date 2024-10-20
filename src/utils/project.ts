@@ -1,13 +1,7 @@
 import { useHttp } from "./http";
 import { removeEmptyValue } from "./utils";
 import { Project } from "../types/project";
-import {
-  QueryKey,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { useProjectsSearchParams } from "../pages/project-list/util";
+import { QueryKey, useMutation, useQuery } from "@tanstack/react-query";
 import {
   useAddConfig,
   useDeleteConfig,

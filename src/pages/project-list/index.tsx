@@ -5,7 +5,12 @@ import styled from "@emotion/styled";
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
 import { useProjectModal, useProjectsSearchParams } from "./util";
-import { ButtonNoPadding, ErrorBox, Row } from "../../components/lib";
+import {
+  ButtonNoPadding,
+  ErrorBox,
+  Row,
+  ScreenContainer,
+} from "../../components/lib";
 
 export default function ProjectList() {
   const { open } = useProjectModal();
@@ -15,7 +20,7 @@ export default function ProjectList() {
   const { data: users } = useUsers();
 
   return (
-    <Container>
+    <ScreenContainer>
       <Row between>
         <h1>项目列表</h1>
         <ButtonNoPadding type={"link"} onClick={open}>
@@ -25,13 +30,9 @@ export default function ProjectList() {
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       <ErrorBox error={error} />
       <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </Container>
+    </ScreenContainer>
   );
 }
 
 // whyDidYouRender 用于检测组件是否被重新渲染
 ProjectList.whyDidYouRender = false;
-
-const Container = styled.div`
-  padding: 3.2rem;
-`;

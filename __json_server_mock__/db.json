@@ -32,7 +32,7 @@
       "personId": "2",
       "organization": "外卖组",
       "created": 1609459200000,
-      "pin": true
+      "pin": false
     },
     {
       "id": "3",
@@ -61,7 +61,8 @@
     {
       "name": "3",
       "organization": "3",
-      "id": "B_RH5at"
+      "id": "B_RH5at",
+      "pin": false
     }
   ],
   "me": {
@@ -101,7 +102,7 @@
       "projectId": 1,
       "epicId": 1,
       "kanbanId": 1,
-      "typeId": 1,
+      "typeId": 2,
       "note": "这是任务1"
     },
     {
@@ -121,7 +122,7 @@
       "projectId": 1,
       "epicId": 1,
       "kanbanId": 2,
-      "typeId": 2,
+      "typeId": 1,
       "note": "这是任务3"
     },
     {
@@ -191,6 +192,48 @@
       "projectId": 1,
       "kanbanId": 1,
       "id": 12
+    },
+    {
+      "typeId": 1,
+      "name": "ddd",
+      "projectId": 1,
+      "kanbanId": 3,
+      "id": 13
+    },
+    {
+      "typeId": 1,
+      "name": "sss",
+      "projectId": 1,
+      "kanbanId": 4,
+      "id": 14
+    },
+    {
+      "typeId": 1,
+      "name": "aaaa",
+      "projectId": 1,
+      "kanbanId": 4,
+      "id": 15
+    },
+    {
+      "typeId": 1,
+      "name": "www",
+      "projectId": 1,
+      "kanbanId": 3,
+      "id": 16
+    },
+    {
+      "typeId": 1,
+      "name": "rrrr",
+      "projectId": 1,
+      "kanbanId": 1,
+      "id": 17
+    },
+    {
+      "typeId": 1,
+      "name": "内容管理",
+      "projectId": 1,
+      "kanbanId": 4,
+      "id": 18
     }
   ],
   "taskTypes": [
