@@ -86,6 +86,11 @@
       "id": 3,
       "name": "已完成",
       "projectId": 1
+    },
+    {
+      "name": "ceshi",
+      "projectId": 1,
+      "id": 4
     }
   ],
   "tasks": [
@@ -148,6 +153,44 @@
       "kanbanId": 3,
       "typeId": 1,
       "note": "这是任务6"
+    },
+    {
+      "name": "提交测试",
+      "projectId": 1,
+      "kanbanId": 2,
+      "id": 7
+    },
+    {
+      "name": "测试任务",
+      "projectId": 1,
+      "kanbanId": 3,
+      "id": 8
+    },
+    {
+      "name": "测试",
+      "projectId": 1,
+      "kanbanId": 4,
+      "id": 9
+    },
+    {
+      "name": "测试",
+      "projectId": 1,
+      "kanbanId": 2,
+      "id": 10
+    },
+    {
+      "typeId": 1,
+      "name": "sss",
+      "projectId": 1,
+      "kanbanId": 2,
+      "id": 11
+    },
+    {
+      "typeId": 1,
+      "name": "dddd",
+      "projectId": 1,
+      "kanbanId": 1,
+      "id": 12
     }
   ],
   "taskTypes": [
