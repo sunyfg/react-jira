@@ -10,6 +10,7 @@ import ProjectScreen from "./pages/project";
 import { resetRoute } from "./utils/utils";
 import { ProjectModal } from "./components/project-modal";
 import { ProjectPopover } from "./components/project-popover";
+import { UserPopover } from "./components/user-popover";
 
 export default function AuthenticatedApp() {
   return (
@@ -39,7 +40,7 @@ const PageHeader = () => {
         </ButtonNoPadding>
 
         <ProjectPopover />
-        <span>用户</span>
+        <UserPopover />
       </HeaderLeft>
       <HeaderRight>
         <User />
