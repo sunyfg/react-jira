@@ -1,10 +1,14 @@
 import { QueryKey, useMutation, useQuery } from "@tanstack/react-query";
 import { Kanban } from "../types/kanban";
 import { useHttp } from "./http";
-import { useAddConfig, useDeleteConfig } from "./use-optimistic-options";
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useReorderConfig,
+} from "./use-optimistic-options";
 
 // 获取看板列表
-export const useKanban = (param?: Partial<Kanban>) => {
+export const useKanbans = (param?: Partial<Kanban>) => {
   const client = useHttp();
 
   return useQuery<Kanban[]>(["kanbans", param], () =>
@@ -30,5 +34,26 @@ export const useDeleteKanban = (queryKey: QueryKey) => {
   return useMutation(
     ({ id }: { id: number }) => client(`kanbans/${id}`, { method: "DELETE" }),
     useDeleteConfig(queryKey),
+  );
+};
+
+export interface SortProps {
+  fromId: number;
+  referenceId: number;
+  type: "before" | "after";
+  fromKanbanId?: number;
+  toKanbanId?: number;
+}
+// 重新排序看板
+export const useReorderKanban = (queryKey: QueryKey) => {
+  const client = useHttp();
+
+  return useMutation(
+    (params: SortProps) =>
+      client("kanbans/reorder", {
+        data: params,
+        method: "POST",
+      }),
+    useReorderConfig(queryKey),
   );
 };

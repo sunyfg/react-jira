@@ -42,5 +42,15 @@ module.exports = (req, res, next) => {
     }
   }
 
+  if (req.method === "POST" && req.path === "/kanbans/reorder") {
+    // 看板排序
+    return res.status(200).json({ code: 200 });
+  }
+
+  if (req.method === "POST" && req.path === "/tasks/reorder") {
+    // 任务排序
+    return res.status(200).json({ code: 200 });
+  }
+
   next();
 };

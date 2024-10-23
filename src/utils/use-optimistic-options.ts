@@ -43,3 +43,6 @@ export const useEditeConfig = (queryKey: QueryKey) =>
 
 export const useAddConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (target, old) => [...old, target]);
+
+export const useReorderConfig = (queryKey: QueryKey) =>
+  useConfig(queryKey, (target, old) => old || []);
