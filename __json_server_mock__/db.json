@@ -87,11 +87,6 @@
       "id": 3,
       "name": "已完成",
       "projectId": 1
-    },
-    {
-      "name": "ceshi",
-      "projectId": 1,
-      "id": 4
     }
   ],
   "tasks": [
@@ -170,12 +165,6 @@
     {
       "name": "测试",
       "projectId": 1,
-      "kanbanId": 4,
-      "id": 9
-    },
-    {
-      "name": "测试",
-      "projectId": 1,
       "kanbanId": 2,
       "id": 10
     },
@@ -202,38 +191,10 @@
     },
     {
       "typeId": 1,
-      "name": "sss",
-      "projectId": 1,
-      "kanbanId": 4,
-      "id": 14
-    },
-    {
-      "typeId": 1,
-      "name": "aaaa",
-      "projectId": 1,
-      "kanbanId": 4,
-      "id": 15
-    },
-    {
-      "typeId": 1,
-      "name": "www",
-      "projectId": 1,
-      "kanbanId": 3,
-      "id": 16
-    },
-    {
-      "typeId": 1,
       "name": "rrrr",
       "projectId": 1,
       "kanbanId": 1,
       "id": 17
-    },
-    {
-      "typeId": 1,
-      "name": "内容管理",
-      "projectId": 1,
-      "kanbanId": 4,
-      "id": 18
     }
   ],
   "taskTypes": [

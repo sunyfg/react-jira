@@ -1,7 +1,11 @@
 import { QueryKey, useMutation, useQuery } from "@tanstack/react-query";
 import { useHttp } from "./http";
 import { Task } from "../types/task";
-import { useAddConfig, useEditeConfig } from "./use-optimistic-options";
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useEditeConfig,
+} from "./use-optimistic-options";
 
 // 获取任务列表
 export const useTasks = (param?: Partial<Task>) => {
@@ -40,5 +44,15 @@ export const useEditTask = (queryKey: QueryKey) => {
     (params: Partial<Task>) =>
       client(`tasks/${params.id}`, { data: params, method: "PATCH" }),
     useEditeConfig(queryKey),
+  );
+};
+
+// 删除任务
+export const useDeleteTask = (queryKey: QueryKey) => {
+  const client = useHttp();
+
+  return useMutation(
+    ({ id }: { id: number }) => client(`tasks/${id}`, { method: "DELETE" }),
+    useDeleteConfig(queryKey),
   );
 };

@@ -1,15 +1,17 @@
 import { Kanban } from "../../types/kanban";
 import { useTasks } from "../../utils/task";
 import { useTaskTypes } from "../../utils/task-types";
-import { useTaskModal, useTasksSearchParams } from "./utils";
+import { useKanbanQueryKey, useTaskModal, useTasksSearchParams } from "./utils";
 
 import taskIcon from "../../assets/task.svg";
 import bugIcon from "../../assets/bug.svg";
 import styled from "@emotion/styled";
-import { Card } from "antd";
+import { Button, Card, Dropdown, MenuProps, Modal } from "antd";
 import { CreateTask } from "./create-task";
 import { Task } from "../../types/task";
 import { Mark } from "../../components/mark";
+import { useDeleteKanban } from "../../utils/kanban";
+import { Row } from "../../components/lib";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes();
@@ -39,12 +41,50 @@ const TaskCard = ({ task }: { task: Task }) => {
   );
 };
 
+// 看板列的更多操作
+const More = ({ kanban }: { kanban: Kanban }) => {
+  const { mutateAsync } = useDeleteKanban(useKanbanQueryKey());
+
+  const startEdit = () => {
+    Modal.confirm({
+      okText: "确定",
+      cancelText: "取消",
+      title: "确定要删除吗？",
+      onOk: async () => {
+        return mutateAsync({ id: kanban.id });
+      },
+    });
+  };
+
+  const overlay: MenuProps = {
+    items: [
+      {
+        key: "delete",
+        label: (
+          <Button type={"link"} onClick={startEdit}>
+            Delete
+          </Button>
+        ),
+      },
+    ],
+  };
+
+  return (
+    <Dropdown menu={overlay}>
+      <Button type="link">...</Button>
+    </Dropdown>
+  );
+};
+
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTasksSearchParams());
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
   return (
     <Container>
-      <h3>{kanban.name}</h3>
+      <Row between>
+        <h3>{kanban.name}</h3>
+        <More kanban={kanban} />
+      </Row>
       <TasksContainer>
         {tasks?.map((task) => <TaskCard task={task} key={task.id} />)}
         <CreateTask kanbanId={kanban.id} />
