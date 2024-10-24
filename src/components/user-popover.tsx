@@ -1,8 +1,5 @@
-import { Button, Divider, List, Popover, Typography } from "antd";
-import { useProjects } from "../utils/project";
+import { Divider, List, Popover, Typography } from "antd";
 import styled from "@emotion/styled";
-import { ButtonNoPadding } from "./lib";
-import { useProjectModal } from "../pages/project-list/util";
 import { useUsers } from "../utils/user";
 
 export const UserPopover = () => {

@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky install",
-    "json-server": "json-server --watch __json_server_mock__/db.json --port 3001 -m __json_server_mock__/middleware.cjs"
+    "json-server": "json-server --watch __json_server_mock__/db.json --port 3001 -m __json_server_mock__/middleware.cjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -r git@github.com:syanfeng/syanfeng.github.io.git -b main"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -40,6 +42,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "gh-pages": "^6.2.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
     "json-server": "0.17.4",

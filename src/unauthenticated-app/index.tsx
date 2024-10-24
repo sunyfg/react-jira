@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LoginPage from "./login";
 import RegisterPage from "./register";
-import { Button, Card, Divider, Typography } from "antd";
+import { Button, Card, Divider } from "antd";
 import styled from "@emotion/styled";
 
 import logo from "@/assets/logo.svg";

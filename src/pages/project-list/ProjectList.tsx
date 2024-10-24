@@ -24,6 +24,7 @@ export default function List({ users, ...props }: ListProps) {
         {
           title: <Pin checked={true} disabled />,
           render: (value, project) => {
+            console.log("🚀 ~ List ~ value:", value);
             return (
               <Pin
                 checked={project.pin}
@@ -61,6 +62,7 @@ export default function List({ users, ...props }: ListProps) {
           dataIndex: "created",
           key: "created",
           render: (created: number, project) => {
+            console.log("🚀 ~ List ~ created:", created);
             return (
               <span>
                 {project.created
@@ -72,6 +74,7 @@ export default function List({ users, ...props }: ListProps) {
         },
         {
           render: (val, project) => {
+            console.log("🚀 ~ List ~ val:", val);
             return <More project={project} />;
           },
         },

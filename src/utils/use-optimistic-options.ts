@@ -19,6 +19,7 @@ export const useConfig = (
     },
     // // onError 是一个可选的回调函数，它会在 mutation 失败时被调用，并且可以接收一个错误对象和一个上下文对象。
     onError(error: any, target: any, context: any) {
+      console.log("🚀 ~ onError ~ error:", error, target);
       // 回滚
       queryClient.setQueryData(queryKey, context?.previousItems);
     },
@@ -45,4 +46,4 @@ export const useAddConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (target, old) => [...old, target]);
 
 export const useReorderConfig = (queryKey: QueryKey) =>
-  useConfig(queryKey, (target, old) => old || []);
+  useConfig(queryKey, (_target, old) => old || []);
